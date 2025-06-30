@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo/app_theme.dart';
 import 'package:todo/tabs/settings/settings_tabs.dart';
+import 'package:todo/tabs/tasks/add_tasks_bottom_sheet.dart';
 import 'package:todo/tabs/tasks/tasks_tab.dart';
+import 'package:easy_date_timeline/easy_date_timeline.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = "/home";
@@ -41,24 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: tabs[currentTabIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed:
+            () => showModalBottomSheet(
+              context: context,
+              builder: (context) => AddTasksBottomSheet(),
+            ),
         child: Icon(Icons.add, size: 32),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(
-        toolbarHeight: 157,
-        centerTitle: false,
-
-        title: Padding(
-          padding: const EdgeInsets.only(left: 52, top: 31),
-          child: Text(
-            "To Do List",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
-        backgroundColor: AppTheme.primary,
-        foregroundColor: AppTheme.white,
-      ),
     );
   }
 }

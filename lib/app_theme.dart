@@ -25,6 +25,24 @@ class AppTheme {
       foregroundColor: white,
       shape: CircleBorder(side: BorderSide(width: 4, color: white)),
     ),
+    textTheme: TextTheme(
+      titleMedium: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ),
+      titleSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Colors.black,
+      ),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppTheme.primary,
+        foregroundColor: AppTheme.white,
+      ),
+    ),
   );
   static ThemeData darkTheme = ThemeData();
 }
