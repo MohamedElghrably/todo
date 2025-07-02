@@ -18,6 +18,10 @@ class FirebaseFunctions {
     task.id = doc.id;
     return doc.set(task);
   }
+  static Future<void> deleteTaskFromFirestore(String taskId) {
+    CollectionReference<TaskModels> collection = getTasksCollection();
+    return collection.doc(taskId).delete(); // delete the task by id
+  }
 
   static Future<List<TaskModels>> getAllTasksFromFirebase() async {
     CollectionReference<TaskModels> collection = getTasksCollection();

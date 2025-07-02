@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 import 'package:todo/app_theme.dart';
 import 'package:todo/firebase_functions.dart';
 import 'package:todo/models/task_models.dart';
@@ -107,6 +108,11 @@ class _AddTasksBottomSheetState extends State<AddTasksBottomSheet> {
       onTimeout: () {
         Navigator.pop(context);
         Provider.of<TaskProvider>(context, listen: false).getTasks();
+        toastification.show(
+  context: context, // optional if you use ToastificationWrapper
+  title: Text('Task added successfully!'),
+  autoCloseDuration: const Duration(seconds: 5),
+);
       },
     );
   }

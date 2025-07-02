@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 import 'package:todo/app_theme.dart';
 import 'package:todo/models/task_models.dart';
+import 'package:todo/tabs/tasks/task_provider.dart';
 
 class TaskItem extends StatelessWidget {
   TaskModels task;
   TaskItem({required this.task});
   @override
   Widget build(BuildContext context) {
+    TaskProvider taskProvider = Provider.of<TaskProvider>(context);
     return Container(
       decoration: BoxDecoration(
         color: AppTheme.white,
@@ -57,7 +61,20 @@ class TaskItem extends StatelessWidget {
               color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(Icons.check, size: 32, color: AppTheme.white),
+            child: InkWell(
+              onTap:
+                  () => {
+                    toastification.show(
+                      context:
+                          context, // optional if you use ToastificationWrapper
+                      title: Text('Done'),
+                      autoCloseDuration: const Duration(seconds: 5),
+                    ),
+                    print("taskid $task.id"),
+                    taskProvider.deleteTask(task.id),
+                  },
+              child: Icon(Icons.check, size: 32, color: AppTheme.white),
+            ),
           ),
         ],
       ),

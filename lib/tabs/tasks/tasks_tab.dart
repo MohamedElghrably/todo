@@ -16,11 +16,11 @@ class _TasksTabState extends State<TasksTab> {
   @override
   Widget build(BuildContext context) {
     TaskProvider taskProvider = Provider.of<TaskProvider>(context);
-    if (getTaskListFlag) {
+    // if (getTaskListFlag) {
       // because not entering inifinite loop of setstate
       taskProvider.getTasks();
-      getTaskListFlag = false;
-    }
+      // getTaskListFlag = false;
+    // }
     return Column(
       children: [
         Stack(
@@ -54,9 +54,9 @@ class _TasksTabState extends State<TasksTab> {
                 firstDate: DateTime.now().subtract(Duration(days: 365)),
                 focusDate: taskProvider.selectedDate,
                 lastDate: DateTime.now().add(Duration(days: 365)),
-                showTimelineHeader: false,
+                showTimelineHeader: true,
                 dayProps: EasyDayProps(
-                  dayStructure: DayStructure.dayStrDayNum,
+                  dayStructure: DayStructure.dayStrDayNumMonth,
                   activeDayStyle: DayStyle(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
@@ -75,6 +75,7 @@ class _TasksTabState extends State<TasksTab> {
                     monthStrStyle: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
+                      color: AppTheme.primary,
                     ),
                   ),
                   inactiveDayStyle: DayStyle(
@@ -83,12 +84,17 @@ class _TasksTabState extends State<TasksTab> {
                       color: AppTheme.white,
                     ),
                     dayNumStyle: TextStyle(
-                      fontSize: 15,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: AppTheme.dark,
                     ),
                     dayStrStyle: TextStyle(
-                      fontSize: 15,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.dark,
+                    ),
+                    monthStrStyle: TextStyle(
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
                       color: AppTheme.dark,
                     ),
@@ -96,22 +102,30 @@ class _TasksTabState extends State<TasksTab> {
                   todayStyle: DayStyle(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
-                      color: AppTheme.white,
+                      color: AppTheme.dark,
                     ),
                     dayNumStyle: TextStyle(
-                      fontSize: 15,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.dark,
+                      color: AppTheme.white,
                     ),
                     dayStrStyle: TextStyle(
-                      fontSize: 15,
+                      fontSize: 12,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.dark,
+                      color: AppTheme.white,
+                    ),
+                    monthStrStyle: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.white,
                     ),
                   ),
                 ),
                 onDateChange:
-                    (selectedDate) => {taskProvider.changeDate(selectedDate)},
+                    (selectedDate) => {
+                      taskProvider.changeDate(selectedDate),
+                    taskProvider.getTasks()
+                      },
               ),
             ),
           ],
